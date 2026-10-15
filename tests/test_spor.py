@@ -384,8 +384,8 @@ def test_spor_object_executor_working_dir(
         },
     }
     calling_dict["working_directory"] = str(working_dir)
-    if error:
-        with pytest.raises(ValidationError):
+    if error:  # TODO check if this is still correct
+        with pytest.raises(ValidationError):  # ruff: ignore[pytest-raises-with-multiple-statements]
             spor_object = SPORObjectExecutor(**calling_dict)
             spor_object.setup_working_directory("idididid")
         return
@@ -571,7 +571,7 @@ def test_spor_object_executor_interface_add(
     if reset_reason is not None:
         assert reset_reason == step_info["info"]["reset_reason"]
     assert (old_done or new_done) == step_info["done"]
-    assert step_info["reward"] == 0.0
+    assert np.isclose(step_info["reward"], 0.0)
 
 
 @pytest.mark.parametrize(
@@ -651,7 +651,7 @@ def test_spor_object_executor_interface_read(
     if reset_reason is not None:
         assert reset_reason == step_info["info"]["reset_reason"]
     assert (old_done or new_done) == step_info["done"]
-    assert step_info["reward"] == 0.0
+    assert np.isclose(step_info["reward"], 0.0)
     obs_names = get_obs_name(spor_object.additional_observations)
     if len(obs_names) == 1:
         obs_name = obs_names[0]

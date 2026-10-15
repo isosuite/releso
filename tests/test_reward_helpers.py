@@ -2,6 +2,7 @@ import json
 import uuid
 from pathlib import Path
 
+import numpy as np
 import pytest
 from conftest import dir_save_location_path
 
@@ -219,9 +220,11 @@ def test_parse_communication_interface(
     elif r:
         assert argparse_ret.run_id == uuid.UUID(r)
     if validation_value:
-        assert argparse_ret.validation_value == float(validation_value)
+        assert np.isclose(
+            argparse_ret.validation_value, float(validation_value)
+        )
     elif v:
-        assert argparse_ret.validation_value == float(v)
+        assert np.isclose(argparse_ret.validation_value, float(v))
     if base_save_location:
         assert argparse_ret.base_save_location == base_save_location
     elif l_parameter:

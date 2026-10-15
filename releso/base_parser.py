@@ -120,9 +120,7 @@ class BaseParser(BaseModel):
             else:
                 train_env = SubprocVecEnv(env_create_list)
         else:
-            train_env = DummyVecEnv([
-                lambda: self.environment.get_gym_environment()
-            ])
+            train_env = DummyVecEnv([self.environment.get_gym_environment])
 
         self._agent = self.agent.get_agent(train_env, normalizer_divisor)
         self.get_logger().info(f"Agent is of type {type(self._agent)}")
@@ -202,7 +200,7 @@ class BaseParser(BaseModel):
 
     def evaluate_model(
         self,
-        validation_env: None | Environment = None,
+        validation_env: Environment | None = None,
         throw_error_if_none: bool = False,
     ) -> None:
         """Validate the current agent.
