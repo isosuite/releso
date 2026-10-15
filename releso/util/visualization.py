@@ -691,7 +691,7 @@ def plot_step_log(
             return 2, 1, False
 
     # Add traces
-    for idx, (kind, colname) in enumerate(trace_order):
+    for idx in range(trace_order):
         row, col, sec = trace_location(idx)
         fig.add_trace(
             go.Scatter(

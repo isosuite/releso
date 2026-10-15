@@ -294,3 +294,10 @@ def get_null_logger():
     null_handler = logging.NullHandler()
     logger.addHandler(null_handler)
     return logger
+
+
+@pytest.fixture
+def rand_gen():
+    import numpy as np
+
+    return np.random.default_rng()

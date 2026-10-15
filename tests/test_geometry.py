@@ -45,6 +45,7 @@ def test_geometry_init(
     dir_save_location,
     caplog,
     request,
+    rand_gen,
 ):
     call_dict = {
         "shape_definition": request.getfixturevalue(shape_definition),
@@ -96,7 +97,7 @@ def test_geometry_init(
     else:
         assert isinstance(act_def, spaces.Box)
         assert act_def.shape == (len(geometry._actions),)
-        geometry.apply_action(np.random.rand(len(geometry._actions)))
+        geometry.apply_action(rand_gen.random(len(geometry._actions)))
     assert geometry.is_geometry_changed() is True
 
     # observation
@@ -219,6 +220,7 @@ def test_ffd_geometry_init(
     dir_save_location,
     caplog,
     request,
+    rand_gen,
 ):
     call_dict = {
         "shape_definition": request.getfixturevalue(shape_definition),
@@ -240,9 +242,8 @@ def test_ffd_geometry_init(
         call_dict["reset_with_random_action_values"] = reset_random
 
     if error:
-        with pytest.raises(ValidationError) as err:
+        with pytest.raises(ValidationError):
             geometry = Geometry(**call_dict)
-            assert error in str(err.value)
         return
 
     geometry = FFDGeometry(**call_dict)
@@ -283,7 +284,7 @@ def test_ffd_geometry_init(
     else:
         assert isinstance(act_def, spaces.Box)
         assert act_def.shape == (len(geometry._actions),)
-        geometry.apply_action(np.random.rand(len(geometry._actions)))
+        geometry.apply_action(rand_gen.random(len(geometry._actions)))
     assert geometry.is_geometry_changed()
 
 

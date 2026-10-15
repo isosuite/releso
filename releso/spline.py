@@ -197,7 +197,7 @@ class SplineDefinition(ShapeDefinition):
                 if v is None:
                     v = []
                     for element in inner_dim:
-                        if element == 0.0:
+                        if np.isclose(element, 0.0):
                             v.append(
                                 VariableLocation(
                                     current_position=element,
@@ -206,7 +206,7 @@ class SplineDefinition(ShapeDefinition):
                                     save_location=save_location,
                                 )
                             )
-                        elif element == 1.0:
+                        elif np.isclose(element, 1.0):
                             v.append(
                                 VariableLocation(
                                     current_position=element,
@@ -235,7 +235,7 @@ class SplineDefinition(ShapeDefinition):
                                 if isinstance(current_list, list)
                                 else [current_list]
                             )
-                            if element == 0.0:
+                            if np.isclose(element, 0.0):
                                 temp_v.append(
                                     [
                                         VariableLocation(
@@ -247,7 +247,7 @@ class SplineDefinition(ShapeDefinition):
                                     ]
                                     + elem
                                 )
-                            elif element == 1.0:
+                            elif np.isclose(element, 1.0):
                                 temp_v.append(
                                     [
                                         VariableLocation(
