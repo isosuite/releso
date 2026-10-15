@@ -467,10 +467,9 @@ def test_shape_definition_initiation(
         "control_points": control_points,
         "save_location": dir_save_location,
     }
-    if error:
-        with pytest.raises(pydantic.ValidationError) as err:
+    if error:  # TODO check if this is still correct
+        with pytest.raises(pydantic.ValidationError):
             shape = ShapeDefinition(**cal_dict)
-            assert "either a float or a VariableLocation" in str(err.value)
         return
     shape = ShapeDefinition(**cal_dict)
     all_variables_variable_location = True
