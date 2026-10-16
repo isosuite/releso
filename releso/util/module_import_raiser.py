@@ -48,12 +48,9 @@ class ModuleImportRaiser:
         Will notify the user, that the functionality is not accessible and how
         to proceed to access the functionality.
         """
-        # if __name == "_ModuleImportRaiser__message":
-        #     return object.__getattr__(self, __name[-8:])
-        # else:
         raise ImportError(self._message)
 
-    def __setattr__(self, name: str, __value: Any) -> None:
+    def __setattr__(self, name: str, value: Any) -> None:
         """Dummy method for object.__name = __value.
 
         Is called when any attribute of the object is set by object.attr = new.
@@ -61,7 +58,7 @@ class ModuleImportRaiser:
         to proceed to access the functionality.
         """
         if name == "_message":
-            object.__setattr__(self, name, __value)
+            object.__setattr__(self, name, value)
         else:
             raise ImportError(self._message)
 
