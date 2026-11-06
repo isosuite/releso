@@ -32,8 +32,8 @@ def add_save_location_if_elem_is_o_dict(
 
     Args:
         possible_value (Any): Variable holding potential objects which need
-        the save_location.
-        save_location (str): string that defines the location
+            the save_location.
+        save_location (str): ``string`` that defines the location
     """
     if isinstance(possible_value, (OrderedDict, dict)):
         if "save_location" not in possible_value:

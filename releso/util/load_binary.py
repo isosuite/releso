@@ -20,15 +20,15 @@ def read_mixd_double(
     Author: Daniel Wolff (wolff@avt.rwth-aachen.de)
 
     Args:
-        filename (string): filename / location of the mixd file
+        filename (str): filename / location of the mixd file
         col (int): number of columns of the integer array
-        element_size (int, optional): Size of the element in bytes.
+        element_size (int | None): Size of the element in bytes.
             Defaults to 8.
-        element (string, optional): Format of the element.
+        element (str | None): Format of the element.
             Defaults to ">d".
 
     Returns:
-        retValues (numpy.ndarray): Double array read from the provided file
+        retValues (:class:`numpy.ndarray`): Double array read from the provided file
     """
     with open(filename, "rb") as f_handle:
         size = os.stat(filename).st_size
@@ -56,15 +56,15 @@ def load_mixd(
     Author: Daniel Wolff (wolff@avt.rwth-aachen.de)
 
     Args:
-        mesh_file (string): filename / location of the mesh file `mxyz`
+        mesh_file (str): filename / location of the mesh file `mxyz`
         mesh_dim (int): Number of spatial dimensions of the mesh
-        solution_file (string): filename / location of the file containing
-        the nodal solutions
+        solution_file (str): filename / location of the file containing
+            the nodal solutions
         ndof (int): Number of degrees of freedom per node
 
     Returns:
-        coordinates (numpy.ndarray): Array of points from the mixd mesh
-        values (numpy.ndarray): Nodal solution values from the mixd file
+        coordinates (:class:`numpy.ndarray`): Array of points from the mixd mesh
+        values (:class:`numpy.ndarray`): Nodal solution values from the mixd file
     """
     coordinates = read_mixd_double(mesh_file, mesh_dim)
     solution = read_mixd_double(solution_file, ndof)
