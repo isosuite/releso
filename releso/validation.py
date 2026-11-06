@@ -26,8 +26,10 @@ class Validation(BaseModel):
 
     #: How many timesteps should pass by learning between validation runs
     validation_freq: conint(ge=1) | None
-    #: List of validation items. This will be revised later on #TODO
-    validation_values: conlist(float, min_items=1)
+    #: Either a list of specific values to do the validation for, or an
+    #: integer denoting the number of validations to conduct. The given
+    #: validation values will be [0, validation_values-1].
+    validation_values: conlist(float, min_items=1) | conint(ge=1)
     #: Whether or not to save the best agent. If agent is not saved only
     #: results will be reported by the agent which produced them will not be
     #: saved.
@@ -229,6 +231,8 @@ class Validation(BaseModel):
                 dict with all the necessary parameters. Should mirror the
                 parameters in parser_environment.Environment.set_validation
         """
+        if isinstance(self.validation_values, int):
+            self.validation_values = list(range(self.validation_values))
         parameters_to_include = [
             "validation_values",
             "end_episode_on_geometry_not_changed",
