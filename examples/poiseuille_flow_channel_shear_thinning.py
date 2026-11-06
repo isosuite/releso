@@ -287,7 +287,7 @@ def compute_quality_criterion(
 
 def calculate_reward(
     quality_criterions: np.ndarray,
-    last_quality_criterions: np.ndarray,
+    last_quality_criterions: np.ndarray | None,
     **kwargs,
 ) -> float:
     """Function that actually calculates the reward.
@@ -296,7 +296,7 @@ def calculate_reward(
 
     Args:
         quality_criterions (List[float]): Current quality criterion values.
-        last_quality_criterions (Optional[List[float]], optional): To track progress the last quality criterions is also an input. Defaults to None.
+        last_quality_criterions (List[float] | None): To track progress the last quality criterions is also an input. Defaults to None.
 
     Returns:
         float: Calculated reward

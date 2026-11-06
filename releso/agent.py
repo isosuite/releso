@@ -196,8 +196,8 @@ class PretrainedAgent(BaseAgent):
     #: Path to the save files of the pretrained agent.
     path: FilePath | pathlib.Path
     #: If the agent is to be trained further the results can be added to the
-    # existing tensorboard experiment. This is the path to the existing
-    # tensorboard experiment
+    #: existing tensorboard experiment. This is the path to the existing
+    #: tensorboard experiment
     tesorboard_run_directory: str | pathlib.Path | None = None
 
     # TODO add testing of agent loading. Need trained agents?
@@ -208,15 +208,14 @@ class PretrainedAgent(BaseAgent):
 
         Args:
             environment (GymEnvironment): Environment with which the agent will
-            interact.
+                interact.
             normalizer_divisor (int): Currently not used in this function.
 
         Raises:
-            AgentUnknownException: Possible exception which can be
-            thrown.
+            AgentUnknownException: Possible exception which can be thrown.
 
         Returns:
-            BaseAlgorithm: Return the correctly loaded agent.
+            stable_baselines3.common.base_class.BaseAlgorithm: Return the correctly loaded agent.
         """
         self.get_logger().info(
             f"Using pretrained agent of type {self.agent_type} from location "
@@ -289,8 +288,8 @@ class A2CAgent(BaseTrainingAgent):
     #: Whether to use generalized State Dependent Exploration (gSDE) instead
     #: of action noise exploration (default: False)
     use_sde = False
-    #: Sample a new noise matrix every n steps when using gSDE Default: -1
-    #: (sample only at beginning of roll)
+    #: Sample a new noise matrix every n steps when using gSDE. Use -1 to
+    #: sample only once at the beginning. Default: -1
     sde_sample_freq = -1
     #: Whether to normalize or not the advantage
     normalize_advantage = False
@@ -323,7 +322,7 @@ class A2CAgent(BaseTrainingAgent):
                 values with n_environments unequal zero.
 
         Returns:
-            A2C: Initialized A2C agent.
+            stable_baselines3.a2c.A2C: Initialized A2C agent.
         """
         self.get_logger().info(f"Using agent of type {self.agent_type}.")
         if normalizer_divisor == 0:
@@ -397,7 +396,7 @@ class PPOAgent(BaseTrainingAgent):
                 values with n_environments unequal zero.
 
         Returns:
-            PPO: Initialized PPO agent.
+            stable_baselines3.ppo.PPO: Initialized PPO agent.
         """
         self.get_logger().info(f"Using agent of type {self.agent_type}.")
         if normalizer_divisor == 0:
@@ -457,7 +456,7 @@ class DDPGAgent(BaseTrainingAgent):
             normalizer_divisor (int): Currently not used in this function.
 
         Returns:
-            DDPG: Initialized DDPG agent.
+            stable_baselines3.ddpg.DDPG: Initialized DDPG agent.
         """
         self.get_logger().info(f"Using agent of type {self.agent_type}.")
         return DDPG(env=environment, **self.get_additional_kwargs())
@@ -504,8 +503,8 @@ class SACAgent(BaseTrainingAgent):
     #: Whether to use generalized State Dependent Exploration (gSDE) instead
     #: of action noise exploration (default: False)
     use_sde: bool = False
-    #: Sample a new noise matrix every n steps when using gSDE Default: -1
-    #: (only sample at the beginning of the rollout)
+    #: Sample a new noise matrix every n steps when using gSDE. Use -1 to
+    #: sample only once at the beginning. Default: -1
     sde_sample_freq: int = -1
     #: Whether to use gSDE instead of uniform sampling during the warm up
     #: phase (before learning starts)
@@ -530,7 +529,7 @@ class SACAgent(BaseTrainingAgent):
             normalizer_divisor (int): Currently not used in this function.
 
         Returns:
-            SAC: Initialized SAC agent.
+            stable_baselines3.sac.SAC: Initialized SAC agent.
         """
         self.get_logger().info(f"Using agent of type {self.agent_type}.")
         return SAC(env=environment, **self.get_additional_kwargs())
@@ -602,7 +601,7 @@ class DQNAgent(BaseTrainingAgent):
             normalizer_divisor (int): Currently not used in this function.
 
         Returns:
-            DQN: Initialized DQN agent.
+            stable_baselines3.dqn.DQN: Initialized DQN agent.
         """
         self.get_logger().info(f"Using agent of type {self.agent_type}.")
         return DQN(env=environment, **self.get_additional_kwargs())

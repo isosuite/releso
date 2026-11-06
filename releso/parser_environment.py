@@ -136,7 +136,7 @@ class Environment(BaseModel):
 
         Raises:
             ParserException: Error is thrown if one of the conditions is
-            not met.
+                not met.
 
         Returns:
             float: reward for the specified occurrence.
@@ -186,11 +186,11 @@ class Environment(BaseModel):
         Args:
             value (float): value to validate
             values (Dict[str, Any]): previously validated values (here
-            max_timesteps_in_episode is important)
+                max_timesteps_in_episode is important)
 
         Raises:
             ParserException: Error is thrown if one of the conditions is
-            not met.
+                not met.
 
         Returns:
             float: reward for the specified occurrence.
@@ -310,7 +310,8 @@ class Environment(BaseModel):
         its observations space.
 
         Returns:
-            # gymnasium.Space: Observation space of the current problem.
+            :class:`gymnasium.spaces.space.Space`:
+                Observation space of the current problem.
         """
         observation_spaces: list[tuple[str, gymnasium.Space]] = []
         # define base observation
@@ -377,7 +378,7 @@ class Environment(BaseModel):
         correct one otherwise return None.
 
         Returns:
-            Optional[int]: Check text above.
+            int | None: Check text above.
         """
         if self._validation_ids is not None:
             return self._validation_ids[
@@ -413,9 +414,9 @@ class Environment(BaseModel):
 
         Args:
             action (Any): Action value depends on if the ActionSpace is
-            discrete (int - Signifier of the action) or
-            Continuous (List[float] - Value for each continuous
-            variable.)
+                discrete (int - Signifier of the action) or
+                Continuous (List[float] - Value for each continuous
+                variable.)
 
         Returns:
             Tuple[Any, float, bool, bool, Dict[str, Any]]: [description]
@@ -557,8 +558,8 @@ class Environment(BaseModel):
         or the environment emits the done signal.
 
         Args:
-            seed (Optional[int], optional): Seed for the environment. Defaults
-            to None.
+            seed (int | None): Seed for the environment. Defaults
+                to None.
 
         Returns:
             Tuple[Any]: Observation of the newly reset environment.
@@ -628,20 +629,20 @@ class Environment(BaseModel):
 
         Args:
             validation_values (List[float]): List of predefined goal states.
-                base_mesh_path (Optional[str], optional): Path to the initial
+                base_mesh_path (str | None): Path to the initial
                 mesh. Defaults to None.
-            end_episode_on_geometry_not_changed (bool, optional): Should the
+            end_episode_on_geometry_not_changed (bool | None): Should the
                 episode end if the geometry has no changes from one episode to
                 the next. Defaults to False.
-            max_timesteps_in_episode (int, optional): Maximal timesteps per
+            max_timesteps_in_episode (int | None): Maximal timesteps per
                 episode, if 0 no limit. Defaults to 0.
-            reward_on_geometry_not_changed (float, optional): Reward to give if
+            reward_on_geometry_not_changed (float | None): Reward to give if
                 episode is terminated due to unchanged geometry.
                 Defaults to None.
-            reward_on_episode_exceeds_max_timesteps(float, optional): Reward
+            reward_on_episode_exceeds_max_timesteps(float | None): Reward
                 given of the episode is terminated due to exceeding the
                 max_timesteps_in_episode. Defaults to None.
-            save_image_in_validation (bool, optional): Should the validation
+            save_image_in_validation (bool | None): Should the validation
                 save periodically the geometry/visualization. Is broken.
                 Defaults to False.
         """

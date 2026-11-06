@@ -299,8 +299,8 @@ class BSplineDefinition(SplineDefinition):
         """Creates the BSpline from the definition given by the json file.
 
         Returns:
-            BSpline: given by the #degrees and knot_vector in each
-            space_dimension and the current control points.
+            splinepy.bspline.BSpline: given by the #degrees and knot_vector in each
+                space_dimension and the current control points.
         """
         self.get_logger().debug("Creating BSpline.")
         self.get_logger().debug(
@@ -422,7 +422,7 @@ class NURBSDefinition(SplineDefinition):
         """Creates a NURBSSpline from the definition given by the json file.
 
         Returns:
-            NURBS: NURBSSpline
+            splinepy.nurbs.NURBS: NURBSSpline
         """
         self.get_logger().debug("Creating NURBS.")
 

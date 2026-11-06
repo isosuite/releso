@@ -28,10 +28,10 @@ class EpisodeLogCallback(BaseCallback):
 
         Args:
             episode_log_location (Path): Path to the episode log.
-            verbose (int, optional): Verbosity of the callback. Defaults to 0.
-            update_n_episodes (int, optional): Update the episode every n
+            verbose (int| None): Verbosity of the callback. Defaults to 0.
+            update_n_episodes (int| None): Update the episode every n
             episodes. Defaults to 1.
-            logger (optional): Logger to use for logging. If None, a default
+            logger (None): Logger to use for logging. If None, a default
             logger is created. Defaults to None.
         """
         super().__init__(verbose=verbose)
@@ -176,12 +176,12 @@ class StepLogCallback(BaseCallback):
 
         Args:
             step_log_location (Path): Path to the step log file.
-            verbose (int, optional): Verbosity of the callback. Defaults to 0.
-            update_every (int, optional): Update the step log file every n
+            verbose (int| None): Verbosity of the callback. Defaults to 0.
+            update_every (int| None): Update the step log file every n
             steps. Defaults to 0 which triggers the update after every episode.
-            log_infos (bool, optional): Whether to log the infos. Defaults to
+            log_infos (bool| None): Whether to log the infos. Defaults to
             False.
-            logger (optional): Logger to use for logging. If None, a default
+            logger (None): Logger to use for logging. If None, a default
             logger is created. Defaults to None.
         """
         super().__init__(verbose)

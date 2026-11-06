@@ -52,7 +52,7 @@ class MultiProcessor(BaseModel):
     Note:
         The cluster uses PATH variables to correctly call mpi. IF you want to
         use MPI multiprocessing on the cluster please use
-        :py:class:`ReLeSO.spor.MPIClusterMultiProcessor`.
+        :py:class:`releso.spor.MPIClusterMultiProcessor`.
     """
 
     #: command prefix which is needed to parallelize the give task
@@ -108,9 +108,9 @@ class MPIClusterMultiProcessor(MultiProcessor):
 
         Raises:
             RuntimeError: This error is thrown if the mpi_flags PATH variable
-            is not of the shape expected by the function. Expected are 2 parts
-            -np [core_count] where -np can be anything and the core_count
-            should be a number.
+                is not of the shape expected by the function. Expected are 2 parts
+                -np [core_count] where -np can be anything and the core_count
+                should be a number.
 
         Returns:
             str: string representing the command line call prefix
@@ -251,10 +251,8 @@ class SPORObject(BaseModel):
         SPORStep.
 
         Returns:
-            Union[
-                ObservationDefinition, ObservationDefinitionMulti,
-                List[ObservationDefinition]]: Additional observation
-                definitions
+            Union[ObservationDefinition, ObservationDefinitionMulti, List[ObservationDefinition]]:
+                Additional observation definitions
         """
         return self.additional_observations
 
@@ -267,12 +265,12 @@ class SPORObject(BaseModel):
         in this object.
 
         Args:
-            observations (ObservationType): Already defined observations to
-            which the additional observations are added to.
+            observations (ObservationType): Existing observations. Any additional
+                observations defined in this object will be added to them.
 
         Returns:
             ObservationType: Observations with now the additional observations
-            of this object added (values used are the default values)
+                of this object added (values used are the default values)
         """
         if self.additional_observations is None:
             pass  # observation do not need to be changed
@@ -304,16 +302,16 @@ class SPORObject(BaseModel):
 
         Args:
             step_information (StepReturnType): Previously collected step
-            values. Should be up-to-date.
+                values. Should be up-to-date.
             environment_id (UUID4): Environment ID which is used to distinguish
-            different environments which run in parallel.
-            validation_id (Optional[int], optional): During validation the
-            validation id signifies the validation episode. If none the current
-            episode is not a validation episode. Defaults to None.
-            core_count (int, optional): Wanted core_count of the task to run.
-            Defaults to 1.
-            reset (bool, optional): Boolean on whether or not this object is
-            called because of a reset. Defaults to False.
+                different environments which run in parallel.
+            validation_id (int | None): During validation the
+                validation id signifies the validation episode. If none the current
+                episode is not a validation episode. Defaults to None.
+            core_count (int| None): Wanted core_count of the task to run.
+                Defaults to 1.
+            reset (bool| None): Boolean on whether or not this object is
+                called because of a reset. Defaults to False.
 
 
         Returns:
@@ -332,7 +330,7 @@ class SPORObjectExecutor(SPORObject):
     users do not need to add them themselves. These are:
 
     1. access to the (MPI) Multi-processors via
-        :py:class:`ReLeSO.spor.MultiProcessor`
+        :py:class:`releso.spor.MultiProcessor`
     2. command line command
     3. additional flags
     4. working directory
@@ -486,7 +484,7 @@ class SPORObjectExecutor(SPORObject):
 
         Args:
             core_count (int): Maximal number of cores the multiprocessor can
-            use.
+                use.
 
         Returns:
             str: command string for the multi processor
@@ -511,7 +509,7 @@ class SPORObjectExecutor(SPORObject):
         Args:
             reset (bool): Boolean on whether or not this object is called
                 because of a reset.
-            validation_id (Optional[int]): During validation the validation id
+            validation_id (int | None): During validation the validation id
                 signifies the validation episode. If none the current episode
                 is not a validation episode.
             step_information (StepReturnType): Previously collected step
@@ -565,8 +563,8 @@ class SPORObjectExecutor(SPORObject):
 
         Args:
             output (bytes): Output of the command line call. To be interpreted.
-            step_dict (Dict): Already known values of the step return this dict
-            will be updated in place.
+            step_dict (Dict): Dictionary containing the existing step return values.
+                This dictionary is modified in place.
         """
         try:
             returned_step_dict = literal_eval(
@@ -593,8 +591,8 @@ class SPORObjectExecutor(SPORObject):
 
         Args:
             returned_step_dict (Dict): Newly received values.
-            step_dict (Dict): Already known values of the step return this dict
-            will be updated in place.
+            step_dict (Dict): Dictionary containing the existing step return values.
+                This dictionary is modified in place.
         """
         # add observations
         if self.additional_observations is None:
@@ -636,10 +634,10 @@ class SPORObjectExecutor(SPORObject):
         Args:
             step_information (StepReturnType): _description_
             environment_id (UUID4): _description_
-            validation_id (Optional[int], optional): _description_.
+            validation_id (int | None): _description_.
                 Defaults to None.
-            core_count (int, optional): _description_. Defaults to 1.
-            reset (bool, optional): _description_. Defaults to False.
+            core_count (int| None): _description_. Defaults to 1.
+            reset (bool| None): _description_. Defaults to False.
 
         Raises:
             NotImplementedError: _description_
@@ -697,14 +695,14 @@ class SPORObjectPythonFunction(SPORObjectExecutor):
             environment_id (UUID4):
                 Environment ID which is used to distinguish different
                 environments which run in parallel.
-            validation_id (Optional[int], optional):
+            validation_id (int | None):
                 During validation the validation id signifies the validation
                 episode. If none the current episode is not a validation
                 episode. Defaults to None.
-            core_count (int, optional):
+            core_count (int| None):
                 Can only be one since no multi processing is possible in this
                 case.
-            reset (bool, optional):
+            reset (bool| None):
                 Boolean on whether or not this object is called because of a
                 reset. Defaults to False.
 
@@ -818,6 +816,7 @@ class SPORObjectInternalPythonFunction(SPORObjectPythonFunction):
 
     """
 
+    #: Name of the function to be called n the internal set.
     function_name: Literal["xns_cnn"]
 
     #: function handler used for python functions which are loaded inside the
@@ -874,14 +873,14 @@ class SPORObjectInternalPythonFunction(SPORObjectPythonFunction):
             environment_id (UUID4):
                 Environment ID which is used to distinguish different
                 environments which run in parallel.
-            validation_id (Optional[int], optional):
+            validation_id (int | None):
                 During validation the validation id signifies the validation
                 episode. If none the current episode is not a validation
                 episode. Defaults to None.
-            core_count (int, optional):
+            core_count (int| None):
                 Can only be one since no multi processing is possible in this
                 case.
-            reset (bool, optional):
+            reset (bool| None):
                 Boolean on whether or not this object is called because of a
                 reset. Defaults to False.
 
@@ -917,6 +916,7 @@ class SPORObjectExternalPythonFunction(SPORObjectPythonFunction):
     touched by the SPORObject.
     """
 
+    #: Path to the python file, to be called for the SPOR Step.
     python_file_path: str | pathlib.Path
 
     #: function handler used for python functions which are loaded inside the
@@ -985,14 +985,14 @@ class SPORObjectExternalPythonFunction(SPORObjectPythonFunction):
             environment_id (UUID4):
                 Environment ID which is used to distinguish different
                 environments which run in parallel.
-            validation_id (Optional[int], optional):
+            validation_id (int | None):
                 During validation the validation id signifies the validation
                 episode. If none the current episode is not a validation
                 episode. Defaults to None.
-            core_count (int, optional):
+            core_count (int| None):
                 Can only be one since no multi processing is possible in this
                 case.
-            reset (bool, optional):
+            reset (bool| None):
                 Boolean on whether or not this object is called because of a
                 reset. Defaults to False.
 
@@ -1061,7 +1061,7 @@ class SPORObjectCommandLine(SPORObjectExecutor):
     users do not need to add them themselves. These are:
 
     1. access to the (MPI) Multi-processors via
-        :py:class:`ReLeSO.spor.MultiProcessor`
+        :py:class:`releso.spor.MultiProcessor`
     2. command line command
     3. additional flags
     4. working directory
@@ -1125,14 +1125,14 @@ class SPORObjectCommandLine(SPORObjectExecutor):
             environment_id (UUID4):
                 Environment ID which is used to distinguish different
                 environments which run in parallel.
-            validation_id (Optional[int], optional):
+            validation_id (int | None):
                 During validation the validation id signifies the validation
                 episode. If none the current episode is not a validation
                 episode. Defaults to None.
-            core_count (int, optional):
+            core_count (int| None):
                 Wanted core_count of the task to run.
                 Defaults to 1.
-            reset (bool, optional):
+            reset (bool| None):
                 Boolean on whether or not this object is called because of a
                 reset. Defaults to False.
 
@@ -1314,7 +1314,7 @@ class SPORList(BaseModel):
         """Aggregate and compute the reward of the SPORList.
 
         The aggregation method is defined in the variable
-        :py:obj:`ReLeSO.spor.SPORList.reward_aggregation`.
+        :py:obj:`releso.spor.SPORList.reward_aggregation`.
 
         Raises:
             RuntimeError: If aggregation method is unknown an error is raised.
@@ -1370,13 +1370,13 @@ class SPORList(BaseModel):
             environment_id (UUID4):
                 Environment ID which is used to distinguish different
                 environments which run in parallel.
-            validation_id (Optional[int], optional):
+            validation_id (int | None):
                 If currently in validation the validation needs to be
                 supplied for steps which need this. If none given no validation
                 is currently performed. Defaults to None.
-            core_count (int, optional):
+            core_count (int| None):
                 Wanted core_count of the task to run. Defaults to 1.
-            reset (bool, optional):
+            reset (bool| None):
                 Boolean on whether or not this object is called because of a
                 reset. Defaults to False.
 

@@ -47,9 +47,9 @@ def set_up_logger(
         Clemens Fricke (clemens.david.fricke@tuwien.ac.at)
 
     Args:
-        logger_name (str, optional):
+        logger_name (str| None):
             Name of the logging instance. Defaults to ''.
-        log_file_location (Path):
+        log_file_location (:class:`pathlib.Path`):
             Path to the directory into which the log file(s) will be placed
             into. Defaults to ".".
         verbosity (VerbosityLevel):
@@ -57,7 +57,7 @@ def set_up_logger(
             Defaults to VerbosityLevel.INFO
         console_logging (bool):
             Toggle whether to also log into the console. Defaults to False.
-        logger (Optional[logging.Logger]):
+        logger (logging.Logger | None):
             Will add handles defined in this function to the given logger.
             Instead of creating a new logger instance. Defaults to None.
 

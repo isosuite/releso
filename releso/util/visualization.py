@@ -105,19 +105,19 @@ def plot_episode_log(
     Args:
         result_folders (dict[str, pathlib.Path]): Dict of name and path to each
           experiment to visualize.
-        window (int, optional): Windowing is used to smooth the plots.
+        window (int| None): Windowing is used to smooth the plots.
           Defaults to 5.
-        window_size (Union[tuple[int, int], Literal['auto']], optional): Size
+        window_size (Union[tuple[int, int], Literal['auto']] | None): Size
          of the figure used. For html 'auto' will adapt the size to the browser
          or container size. Defaults to "auto".
-        cut_off_point (int, optional): Plot the episode only to a certain
+        cut_off_point (int| None): Plot the episode only to a certain
          number of time steps. Defaults to max int.
-        show_validation (bool, optional): Whether to show validation results.
+        show_validation (bool| None): Whether to show validation results.
          Defaults to False.
 
     Returns:
-        fig (plotly.graph_objects.Figure): Plotly figure object with the
-         requested plots for further customization or export.
+        (:class:`plotly.graph_objects.Figure`): Plotly figure object with the
+            requested plots for further customization or export.
     """
     end_episode = []
     df: list[pd.DataFrame] = []
@@ -407,13 +407,13 @@ def get_data_from_dataframe(
         to 5 (6 is exclusive).
 
     Args:
-        df (pd.DataFrame): StepDataFrame containing the data to be extracted.
+        df (pandas.DataFrame): StepDataFrame containing the data to be extracted.
         name (str): Name of field the extracted data should be stored in.
         selector (list[tuple[str, tuple[int, int]]]): List of tuples
-          containing the type of data to extract and the range of indices.
+            containing the type of data to extract and the range of indices.
 
     Returns:
-        pd.DataFrame: DataFrame containing the extracted data.
+        pandas.DataFrame: DataFrame containing the extracted data.
     """
 
     def get_elem_from_crums(df: pd.DataFrame, crums: list[str]) -> np.ndarray:
@@ -510,15 +510,15 @@ def plot_step_log(
           This parameter is only relevant in the case of multi-environment
           training. If the training did not use multiple environments, this
           parameter should be set to 0.
-        episode_start (int, optional): First episode that should be included in
+        episode_start (int| None): First episode that should be included in
           the visualization. Defaults to 0.
-        episode_end (int, optional): Last episode that should be included in
+        episode_end (int| None): Last episode that should be included in
           the visualization. If None, the maximum episode number is used.
           Defaults to None.
-        episode_step (int, optional): Step size for selecting episodes.
+        episode_step (int| None): Step size for selecting episodes.
           Defaults to 1, which means that every episode between the starting
           and final episode are visualized.
-        figure_size (Union[tuple[int, int], Literal['auto']], optional):
+        figure_size (Union[tuple[int, int], Literal['auto']]| None):
           Size of the figure. If 'auto', the size will be adjusted to fit the
           container. Defaults to 'auto'.
         objective_observation (list[tuple[str, tuple[int, int]]]): List of

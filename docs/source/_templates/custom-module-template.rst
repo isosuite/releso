@@ -8,6 +8,7 @@
 
    .. autosummary::
       :toctree:
+      :template: custom-data-template.rst
    {% for item in attributes %}
       {{ item }}
    {%- endfor %}

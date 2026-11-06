@@ -80,7 +80,7 @@ class BaseParser(BaseModel):
 
     # internal objects
     #: Holds the trainable agent for the RL use case. The
-    #: ReLeSO.base_parser.BaseParser.agent defines the type and parameters of
+    #: releso.base_parser.BaseParser.agent defines the type and parameters of
     #: the agent this is the actual trainable agent.
     _agent: BaseAlgorithm | None = PrivateAttr(default=None)
 
@@ -97,7 +97,6 @@ class BaseParser(BaseModel):
         """Starts the training that is specified in the loaded json file.
 
         Successive calls to this function does not train the agent further
-
         but reinitialize the agent.
         """
         train_env: VecEnv | None = None
@@ -180,9 +179,9 @@ class BaseParser(BaseModel):
         location.
 
         Args:
-            file_name (Optional[str]): Path where the agent is saved to. If
-            None will see if json had a save location if also not given will
-            use a default location. Defaults to None.
+            file_name (str | None): Path where the agent is saved to. If
+                None will see if json had a save location if also not given will
+                use a default location. Defaults to None.
 
         Returns:
             str: Path where the agent was saved to.
@@ -210,16 +209,16 @@ class BaseParser(BaseModel):
         agent from the agent variable. Validation will be done inside the
 
         Args:
-            validation_env (Union[None, Environment], optional): If validation
-            environment already exists it will be used else a new validation
-            environment will be created. Defaults to None.
-            throw_error_if_none (bool, optional): If this is set and the
-            validation variable is None an error is thrown. Defaults to False.
+            validation_env (Union[None, Environment] | None): If validation
+                environment already exists it will be used else a new validation
+                environment will be created. Defaults to None.
+            throw_error_if_none (bool| None): If this is set and the
+                validation variable is None an error is thrown. Defaults to False.
 
         Raises:
             ValidationNotSet: Thrown if validation is absolutely needed.
-            If not absolutely needed the validation will not be done but no
-            error will be thrown.
+                If not absolutely needed the validation will not be done but no
+                error will be thrown.
         """
         if self.validation:
             if validation_env is None:
@@ -252,7 +251,7 @@ class BaseParser(BaseModel):
 
         Args:
             logger_name (str): name of the logger used for the rl_logger used
-            for this specific environment.
+                for this specific environment.
         """
 
         def _init():
@@ -274,7 +273,7 @@ class BaseParser(BaseModel):
         """Creates a validation environment.
 
         Args:
-            throw_error_if_none (bool, optional):
+            throw_error_if_none (bool| None):
                 If this is set and the validation variable is None an error is
                 thrown. Defaults to False.
 

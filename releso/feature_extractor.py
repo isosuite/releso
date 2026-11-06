@@ -32,7 +32,7 @@ class FeatureExtractor(BaseFeaturesExtractor):
 
     The standard feature extractor can only be used with a Box defined
     Observation space. For more complex Observations spaces see
-    :py:class:`ReLeSO.feature_extractor.CombinedExtractor`
+    :py:class:`releso.feature_extractor.CombinedExtractor`
     """
 
     def __init__(
@@ -52,18 +52,19 @@ class FeatureExtractor(BaseFeaturesExtractor):
         listed in the network_type variable hint.
 
         Args:
-          observation_space (Space): Observations space of the environment.
-          cnn_output_dim (int, optional): How many features the feature
+          observation_space (gymnasium.spaces.space.Space):
+            Observations space of the environment.
+          cnn_output_dim (int| None): How many features the feature
             extractor should return. Defaults to 128.
-          features_dim (int, optional): Number of dimensions in the feature
+          features_dim (int| None): Number of dimensions in the feature
             dimension.
-          without_linear (bool, optional): Use the pretrained nets without a
+          without_linear (bool| None): Use the pretrained nets without a
             linear layer at the end. Setting the output_dim is not possible
             since the output sie is directly dependent on the input size.
             Defaults to False.
-          network_type (Literal["resnet18", "mobilenetv2"], optional):Network
+          network_type (Literal["resnet18", "mobilenetv2"] | None):Network
             to use for the cnn extractor. Defaults to "resnet18".
-          logger (Optional[logging.Logger], optional): Logger to use for
+          logger (logging.Logger | None): Logger to use for
             logging purposes. Defaults to None.
 
         """
@@ -184,10 +185,10 @@ class FeatureExtractor(BaseFeaturesExtractor):
         """Forward pass of the Network defined.
 
         Args:
-            observations (th.Tensor): Input for the network
+            observations (torch.Tensor): Input for the network
 
         Returns:
-            th.Tensor: Output of the network
+            torch.Tensor: Output of the network
         """
         observations = self.model(observations)
         # return observations
@@ -227,17 +228,17 @@ class CombinedExtractor(BaseFeaturesExtractor):
 
         Args:
             observation_space (spaces.Dict): Observations space of the
-            environment.
-            cnn_output_dim (int, optional): How many features the feature
-            extractor should return. Defaults to 256.
-            without_linear (bool, optional): Use the pretrained nets without a
-            linear layer at the end. Setting the output_dim is not possible
-            since the output is directly dependent on the input size.
-            Defaults to False.
-            network_type (Literal["resnet18", "mobilenetv2"],optional): Network
-            to use for the cnn extractor. Defaults to "resnet18".
-            logger (Optional[logging.Logger], optional): Logger to use for
-            logging purposes. Defaults to None.
+                environment.
+            cnn_output_dim (int | None): How many features the feature
+                extractor should return. Defaults to 256.
+            without_linear (bool | None): Use the pretrained nets without a
+                linear layer at the end. Setting the output_dim is not possible
+                since the output is directly dependent on the input size.
+                Defaults to False.
+            network_type (Literal["resnet18", "mobilenetv2"] | None): Network
+                to use for the cnn extractor. Defaults to "resnet18".
+            logger (logging.Logger | None): Logger to use for
+                logging purposes. Defaults to None.
         """
         # TODO we do not know features-dim here before going over all the
         # items, so put something there. This is not clean!
@@ -270,10 +271,10 @@ class CombinedExtractor(BaseFeaturesExtractor):
         """Forward pass of the Network defined.
 
         Args:
-            observations (th.Tensor): Input for the network
+            observations (torch.Tensor): Input for the network
 
         Returns:
-            th.Tensor: Output of the network
+            torch.Tensor: Output of the network
         """
         encoded_tensor_list = []
 
