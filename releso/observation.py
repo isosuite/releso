@@ -37,8 +37,8 @@ class ObservationDefinition(BaseModel):
         gymnasium.observation interface
 
         Returns:
-            Tuple[str, Space]: Tuple of the name of the observation and a
-            gymnasium.Box definition
+            Tuple[str, gymnasium.spaces.Space]: Tuple of the name of the
+                observation and a gymnasium.spaces.Box definition
         """
         return (
             self.name,
@@ -53,8 +53,8 @@ class ObservationDefinition(BaseModel):
         the training does not error out.
 
         Returns:
-            np.ndarray: An array filled with ones in the correct shape and size
-            of the observation.
+            :class:`numpy.ndarray`: An array filled with ones in the correct shape and size
+                of the observation.
         """
         return np.ones((1,)) * self.value_min
 
@@ -82,7 +82,8 @@ class ObservationDefinitionMulti(ObservationDefinition):
         gymnasium.observation interface
 
         Returns:
-            Tuple[str, Space]: Tuple of the name of the observation
+            Tuple[str, gymnasium.spaces.space.Space]:
+                Tuple of the name of the observation
                 and a gymnasium.Box definition
         """
         if self.value_type == "CNN":
@@ -113,8 +114,8 @@ class ObservationDefinitionMulti(ObservationDefinition):
         the training does not error out.
 
         Returns:
-            np.ndarray: An array filled with ones in the correct shape and size
-            of the observation.
+            :class:`numpy.ndarray`: An array filled with ones in the correct shape and size
+                of the observation.
         """
         if self.value_type == "CNN":
             return np.zeros(self.observation_shape, dtype=np.uint8)

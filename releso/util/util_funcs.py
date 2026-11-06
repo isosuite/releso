@@ -59,7 +59,7 @@ def which(
         https://stackoverflow.com/a/377028
 
     Returns:
-        Optional[str]: None if not found else execution file.
+        str | None: None if not found else execution file.
     """
 
     def is_exe(fpath):
@@ -112,11 +112,11 @@ def join_infos(old_info: InfoType, new_info: InfoType, logger_name: str):
 
     Args:
         old_info (InfoType): Already existing info dictionary which should be
-        updated with the new infos.
+            updated with the new infos.
         new_info (InfoType): Newly received info. Which needs to be added to
-        the already existing infos.
+            the already existing infos.
         logger_name (str): LoggerName so that if necessary the log message is
-        sent into the correct logging cue.
+            sent into the correct logging cue.
     """
     old_info.update(new_info)
 

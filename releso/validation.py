@@ -5,12 +5,13 @@ from __future__ import annotations
 import pathlib
 from typing import Any
 
+from gymnasium import Env
 from pydantic.class_validators import validator
 from pydantic.types import conint, conlist
 from stable_baselines3.common.base_class import BaseAlgorithm
 from stable_baselines3.common.callbacks import EvalCallback
 from stable_baselines3.common.evaluation import evaluate_policy
-from stable_baselines3.common.type_aliases import GymEnv
+from stable_baselines3.common.vec_env import VecEnv
 
 from releso.base_model import BaseModel
 from releso.exceptions import ParserException
@@ -162,23 +163,25 @@ class Validation(BaseModel):
 
     def get_callback(
         self,
-        eval_environment: GymEnv,
+        eval_environment: Env | VecEnv,
         save_location: pathlib.Path | None = None,
         normalizer_divisor: int = 1,
     ) -> EvalCallback:
         """Creates the EvalCallback with the values given in this object.
 
         Args:
-            eval_environment (GymEnv): Evaluation environment. Should be the
+            eval_environment (gymnasium.Env | stable_baselines3.common.vec_env.VecEnv):
+                Evaluation environment. Should be the
                 same as the normal training environment only that here the goal
                 values should be set and not random.
-            save_location (Optional[pathlib.Path]): Path to where the best
+            save_location (pathlib.Path | None): Path to where the best
                 models should be save to.
-            normalizer_divisor (int, optional): Divisor for the eval_freq.
+            normalizer_divisor (int| None): Divisor for the eval_freq.
                 Defaults to 1.
 
         Returns:
-            EvalCallback: Validation callback parametrized by this object.
+            stable_baselines3.common.callbacks.EvalCallback: Validation callback
+                parametrized by this object.
         """
         # build the dictionary holding the variables needed to initialize the
         # callback. See callback signature for variable explanation
@@ -196,15 +199,17 @@ class Validation(BaseModel):
         return EvalCallback(**variable_dict)
 
     def end_validation(
-        self, agent: BaseAlgorithm, environment: GymEnv
+        self, agent: BaseAlgorithm, environment: Env | VecEnv
     ) -> tuple[float, float]:
         """Function is called at the end of a validation.
 
         All clean up and last evaluation is going in here.
 
         Args:
-            agent (BaseAlgorithm): Agent which is to be used to validate.
-            environment (GymEnv): Validation environment
+            agent (stable_baselines3.common.base_class.BaseAlgorithm):
+                Agent which is to be used to validate.
+            environment (gymnasium.Env | stable_baselines3.common.vec_env.VecEnv):
+                Validation environment
 
         Returns:
             Tuple[float, float]: See 'funct'evaluate_policy() for definition

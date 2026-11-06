@@ -13,7 +13,7 @@ multiple instances of the environment accessible for multi environment training
 and separate validation environment.
 
 An instance of this class is created by the
-ReLeSO.parser_environment.Environment.get_gym_environment function. Each call
+releso.parser_environment.Environment.get_gym_environment function. Each call
 of this function creates a new gym environment.
 
 Note:
@@ -42,6 +42,8 @@ class GymEnvironment(gymnasium.Env):
     SbSOvRL.parser_environment.Environment class.
     """
 
+    #: additional metadata that is not as relevant anymore
+    #: kept for backwards compatibility
     metadata = {"render.modes": ["mesh"]}  # noqa: RUF012
 
     def __init__(self, action_space, observation_space) -> None:
