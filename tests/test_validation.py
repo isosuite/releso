@@ -167,6 +167,48 @@ def test(
     assert val_environment_parameters["validation_values"] == validation_values
 
 
+@pytest.mark.parametrize(
+    [
+        "validation_values",
+        "n_values",
+        "first_element",
+        "last_element",
+        "error",
+    ],
+    [
+        (0, 0, 0, 0, True),
+        ([], 0, 0, 0, True),
+        (1, 1, 0, 0, False),
+        (12, 12, 0, 11, False),
+        [[12, 4, 7], 3, 12, 7, False],
+    ],
+)
+def test_validation_values(
+    validation_values,
+    n_values,
+    first_element,
+    last_element,
+    error,
+    dir_save_location,
+):
+    calling_dict = {
+        "validation_freq": 1,
+        "validation_values": validation_values,
+        "save_best_agent": True,
+        "validate_on_training_end": False,
+        "save_location": dir_save_location,
+    }
+    if error:
+        with pytest.raises(ValidationError):
+            Validation(**calling_dict)
+        return
+    val = Validation(**calling_dict)
+    val.get_environment_validation_parameters()
+    assert len(val.validation_values) == n_values
+    assert val.validation_values[0] == first_element
+    assert val.validation_values[-1] == last_element
+
+
 @pytest.mark.parametrize("save_location", [(False), (True)])
 def test_validation_with_environment(
     save_location, dir_save_location, provide_dummy_environment
