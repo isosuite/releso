@@ -13,8 +13,19 @@ documentation root, use os.path.abspath to make it absolute, like shown here.
 
 """
 
+# Needed to mock specific part of gustaf to clear docs build error
+import sys
+from unittest.mock import MagicMock
+
 from pydantic import BaseModel
 from sphinx.ext.napoleon import _skip_member
+
+vedo_mock = MagicMock()
+vedo_mock.__version__ = "2025.0.0"
+
+sys.modules["vedo"] = vedo_mock
+# END
+
 
 from releso.__version__ import __version__
 
@@ -40,19 +51,50 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.napoleon",
     "sphinx-jsonschema",
+    "sphinx.ext.intersphinx",
     # 'sphinxcontrib.autodoc_pydantic'
 ]
 autosummary_generate = True  # Turn on sphinx.ext.autosummary
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
+autosummary_templates = ["_templates"]
 autodoc_mock_imports = [
+    "plotly",
     "gymnasium",
-    "gustaf",
     "vedo",
     "matplotlib",
     "imageio",
     "torchvision",
-    "splinepy",
+    "torch",
+]
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "numpy": ("https://numpy.org/doc/stable", None),
+    "pytorch": ("https://docs.pytorch.org/docs/stable", None),
+    "pydantic": ("https://docs.pydantic.dev/1.10/", None),
+    "pandas": ("https://pandas.pydata.org/docs/", None),
+    "gymnasium": ("https://gymnasium.farama.org/", None),
+    "stable_baselines3": (
+        "https://stable-baselines3.readthedocs.io/en/master/",
+        None,
+    ),
+    "plotly": ("https://plotly.com/python-api-reference/", None),
+    "splinepy": ("https://isosuite.github.io/splinepy/", None),
+    "gustaf": ("https://isosuite.github.io/gustaf/", None),
+}
+nitpick_ignore = [
+    ("py:class", "pydantic.types.UUID4"),
+    ("py:class", "UUID4"),
+    ("py:class", "pydantic.types.FilePath"),
+    # conint() dynamically generates this class.
+    ("py:class", "releso.base_parser.ConstrainedIntValue"),
+    ("py:class", "releso.mesh.ConstrainedIntValue"),
+    ("py:class", "releso.validation.ConstrainedIntValue"),
+    ("py:class", "releso.spor.ConstrainedIntValue"),
+    ("py:class", "releso.spline.ConstrainedIntValue"),
+    ("py:class", "releso.parser_environment.ConstrainedIntValue"),
+    ("py:class", "releso.shape_parameterization.ConstrainedIntValue"),
+    ("py:class", "types.ConstrainedListValue"),
 ]
 # show type hints in doc body instead of signature
 # autodoc_typehints = "both"

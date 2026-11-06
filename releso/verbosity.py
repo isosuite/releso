@@ -152,10 +152,10 @@ class Verbosity(BaseModel):
         """Initializes a logger with the settings for the environment logger.
 
         The name of the base environment logger is extended by the
-        :attr:`extension`. The name if the created logger is found by joining
+        `extension`. The name if the created logger is found by joining
         the strings of the following variables by an underscore.
         :attr:`Verbosity.base_logger_name`,
-        :attr:`Verbosity.environment_extension`, :attr:`extension` Any empty
+        :attr:`Verbosity.environment_extension`, `extension` Any empty
         strings are ignored.
 
         Args:

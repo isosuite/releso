@@ -28,15 +28,15 @@ def get_tricontour_solution(
         width (int): _description_
         height (int): _description_
         dpi (int): _description_
-        coordinates (np.ndarray): _description_
-        connectivity (np.ndarray): _description_
-        solution (np.ndarray): _description_
+        coordinates (:class:`numpy.ndarray`): _description_
+        connectivity (:class:`numpy.ndarray`): _description_
+        solution (:class:`numpy.ndarray`): _description_
         sol_len (int): _description_
         limits_min (List[float]): _description_
         limits_max (List[float]): _description_
 
     Returns:
-        np.ndarray: _description_
+        :class:`numpy.ndarray`: _description_
     """
     arrays: list[np.ndarray] = []
     for i in range(sol_len):
@@ -120,9 +120,9 @@ def get_tricontour_solution(
 #     Args:
 #         files (List[str]): _description_
 #         save_path (str): _description_
-#         fps (int, optional): _description_. Defaults to 5.
-#         delete_used (bool, optional): _description_. Defaults to True.
-#         cut (bool, optional): _description_. Defaults to True.
+#         fps (int| None): _description_. Defaults to 5.
+#         delete_used (bool| None): _description_. Defaults to True.
+#         cut (bool| None): _description_. Defaults to True.
 #     """
 #     images = []
 #     for file_name in files:
@@ -166,7 +166,7 @@ def get_tricontour_solution(
 
 #     Args:
 #         mesh (gus.Mesh): _description_
-#         optional (bool, optional): _description_. Defaults to False.
+#         optional (bool| None): _description_. Defaults to False.
 
 #     Returns:
 #         Tuple[List[List[List[float]]], pd.DataFrame]: _description_
@@ -203,8 +203,8 @@ def get_tricontour_solution(
 #     Args:
 #         mesh (gus.Mesh): _description_
 #         save_name (str): _description_
-#         no_axis (bool, optional): _description_. Defaults to False.
-#         tight (bool, optional): _description_. Defaults to False.
+#         no_axis (bool| None): _description_. Defaults to False.
+#         tight (bool| None): _description_. Defaults to False.
 #     """
 #     plt.rcParams["figure.figsize"] = (20, 20)
 #     plt.rcParams.update({'font.size': 22})
@@ -245,19 +245,19 @@ def get_tricontour_solution(
 
 #     Args:
 #         spline (gus.nurbs.Spline): _description_
-#         axis (Optional[plt.Axes], optional): _description_. Defaults to None.
-#         export_path (Optional[str], optional): _description_.
+#         axis (Optional[plt.Axes]| None): _description_. Defaults to None.
+#         export_path (Optional[str]| None): _description_.
 #           Defaults to None.
-#         close (bool, optional): _description_. Defaults to False.
-#         control_point_marker (str, optional): _description_. Defaults to "*".
-#         control_point_marker_size (int, optional):
+#         close (bool| None): _description_. Defaults to False.
+#         control_point_marker (str| None): _description_. Defaults to "*".
+#         control_point_marker_size (int| None):
 #         _description_. Defaults to 120.
-#         control_point_color (str, optional): _description_. Defaults to "r".
-#         spline_path_color (str, optional): _description_. Defaults to "g".
-#         spline_path_alpha (float, optional): _description_. Defaults to 0.2.
-#         num_points (int, optional): _description_. Defaults to 100.
-#         spline_grid_plot_step (int, optional): _description_. Defaults to 1.
-#         lims (List[List[float]], optional): _description_. Defaults to None.
+#         control_point_color (str| Noneription_. Defaults to "r".
+#         spline_path_color (str| None): _description_. Defaults to "g".
+#         spline_path_alpha (float| None): _description_. Defaults to 0.2.
+#         num_points (int| None): _description_. Defaults to 100.
+#         spline_grid_plot_step (int| None): _description_. Defaults to 1.
+#         lims (List[List[float]]| None): _description_. Defaults to None.
 
 #     Raises:
 #         NotImplemented: _description_
