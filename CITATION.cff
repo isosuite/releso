@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: releso
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - family-names: Fricke
+    given-names: Clemens David
+    email: clemens.david.fricke@tuwien.ac.at
+    affiliation: TU Wien (Technische Universität Wien)
+repository-code: 'https://github.com/isosuite/releso'
+url: 'https://releso.readthedocs.io/en/latest/'
+keywords:
+  - reinforcement learning
+  - shape optimization
+  - scientific computing
+license: MIT
+version: 0.2.4
+date-released: '2026-10-29'
