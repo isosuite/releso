@@ -1,6 +1,6 @@
 # Reinforcement Learning based Shape Optimization (ReLeSO)
 
-[![Read the docs](https://readthedocs.org/projects/releso/badge/?version=latest)](https://releso.readthedocs.io/en/latest/?badge=latest)
+[![Read the docs](https://readthedocs.org/projects/releso/badge/?version=latest)](https://app.readthedocs.org/projects/releso/badge/?version=latest)
 [![PyPI - Version](https://img.shields.io/pypi/v/releso)](https://pypi.org/project/releso/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/releso)](https://pypi.org/project/releso/)
 [![PyPI - License](https://img.shields.io/pypi/l/releso)](https://github.com/isosuite/releso/blob/main/LICENSE)

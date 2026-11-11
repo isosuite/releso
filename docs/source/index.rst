@@ -5,14 +5,10 @@
 
 Reinforcement Learning based Shape Optimization (ReLeSO)
 ========================================================
-|Build Status| |Documentation Status|
+|Documentation Status|
 |PyPI| |Python| |License|
 
-.. |Build Status| image:: https://github.com/isosuite/releso/actions/workflows/build_and_upload_wheels.yml/badge.svg
-   :target: https://github.com/isosuite/releso
-   :alt: PyPI - Version
-
-.. |Documentation Status| image:: https://readthedocs.org/projects/releso/badge/?version=latest
+.. |Documentation Status| image:: https://app.readthedocs.org/projects/releso/badge/?version=latest
     :target: https://releso.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 

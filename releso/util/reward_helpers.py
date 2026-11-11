@@ -127,8 +127,8 @@ def load_json(f_n: PathLike | str) -> dict[str, Any]:
     Will create a dummy file if it does not exist.
 
     Args:
-        f_n (Union[PathLike, str]): Path to the file where the json encoded
-        data is stored.
+        f_n (:py:class:`os.PathLike` | str): Path to the file where the json encoded
+            data is stored.
 
     Returns:
         Dict[str, Any]: Data loaded from the given file.
@@ -153,8 +153,8 @@ def write_json(f_n: PathLike | str, obj_dict: dict[str, Any]):
     Can be used to store persistent variables between calls to the same script.
 
     Args:
-        f_n (Union[PathLike, str]): Path to the file where the json encoded
-        data is to be stored.
+        f_n (:py:class:`os.PathLike` | str): Path to the file where the json encoded
+            data is to be stored.
         obj_dict (Dict[str, Any]): Data that is to be stored.
     """
     with open(f_n, "w") as wf:

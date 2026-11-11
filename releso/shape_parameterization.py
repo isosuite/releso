@@ -6,7 +6,7 @@ shape was chosen.
 
 Note:
     To perform Free Form Deformation (FFD) splines are needed. These are given
-    in a separate module, please see the file `spline.py` for these shape
+    in a separate module, please see :mod:`releso.spline` for these shape
     definitions.
 """
 
@@ -75,7 +75,7 @@ class VariableLocation(BaseModel):
 
         Raises:
             ParserException: Parser error if current_position is not already
-            validated.
+                validated.
 
         Returns:
             float: value of the validated value.
@@ -153,7 +153,7 @@ class VariableLocation(BaseModel):
 
         Returns:
             Dict[str, Any]: Validated variables but if steps was not given
-            before now it has a value.
+                before now it has a value.
         """
         step, n_steps, min_value, max_value = (
             values.get("step"),
@@ -187,7 +187,7 @@ class VariableLocation(BaseModel):
 
         Returns:
             bool: True if (self.max_value > self.current_position) or
-            (self.min_value < self.current_position)
+                (self.min_value < self.current_position)
         """
         if self._is_action is None:
             self._is_action = (self.max_value > self.current_position) or (
@@ -203,7 +203,7 @@ class VariableLocation(BaseModel):
 
         Args:
             increasing (bool): Toggle whether or not the value should increase
-            or not.
+                or not.
 
         Returns:
             float: Value of the position that the current position is now at.
@@ -224,7 +224,7 @@ class VariableLocation(BaseModel):
 
         Args:
             value (float): Scaled value [-1,1] that needs to be descaled and
-            applied as the new current position.
+                applied as the new current position.
 
         Returns:
             float: New clipped value.
@@ -367,13 +367,13 @@ class ShapeDefinition(BaseModel):
         have more than 2D. The figure will plotted with matplotlib.
 
         Args:
-            save_location (Optional[str], optional):
+            save_location (str | None):
                 Location to save the resulting figure to. Defaults to None.
-            no_axis (bool, optional):
+            no_axis (bool| None):
                 Remove axis from the resulting figure. Defaults to False.
-            fig_size (List[float], optional):
+            fig_size (List[float]| None):
                 Size of the resulting figure. Defaults to [6, 6].
-            dpi (int, optional):
+            dpi (int| None):
                 DPI of the resulting figure. Defaults to 400.
 
         Raises:

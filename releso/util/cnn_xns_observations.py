@@ -20,7 +20,7 @@ from releso.util.plotting import get_tricontour_solution
 
 
 def define_observation_definition() -> ObservationDefinitionMulti:
-    """Returns the observation definition for the SPORObject.
+    """Returns the observation definition for the :class:`releso.spor.SPORObject`.
 
     This is a image based observation creation routine. This means, that the
     observation created is of type CNN and has as shape of (3, 200, 200).
@@ -52,20 +52,20 @@ def get_visual_representation(
 
     Note:
         The calculated solution can only be found if the
-        :py:class:`SporObject` of the solver is called main_solver and uses
+        :class:`SPORObject` of the solver is called main_solver and uses
         the xns solver.
     #TODO make it broader in its application e.g. other solvers?
 
     Args:
-        connectivity (np.ndarray): Connectivity array of the mesh.
-        sol_len (int, optional): Number of variables to return per data
+        connectivity (:class:`numpy.ndarray`): Connectivity array of the mesh.
+        sol_len (int| None): Number of variables to return per data
             point, input can be more but not less. Assumed is u,v,p.
             Defaults to 3.
-        height (int, optional): Height of the image array in inches.
+        height (int| None): Height of the image array in inches.
             Defaults to 10.
-        width (int, optional): Width of the image array in inches.
+        width (int| None): Width of the image array in inches.
             Defaults to 10.
-        dpi (int, optional): DPI of the image array. Together with the
+        dpi (int| None): DPI of the image array. Together with the
             height and width, this variable defines the shape of the
             return array shape=(height*dpi, width*dpi, sol_len).
             Defaults to 20.
@@ -119,14 +119,14 @@ def save_current_solution_as_png(
     TODO additional SPORStep for this functionality?
 
     Args:
-        save_location (Union[pathlib.Path, str]): Where the image is to
+        save_location (pathlib.Path | str): Where the image is to
             be saved to. Please add solution specific path, else the file
             will be overwritten if multiple solution are saved.
-        include_pressure (bool, optional): Not only use x-,y-velocity
+        include_pressure (bool| None): Not only use x-,y-velocity
             fields but also the pressure field. Defaults to True.
-        height (int, optional): Self explanatory. Defaults to 10.
-        width (int, optional): Self explanatory. Defaults to 10.
-        dpi (int, optional): Self explanatory. Defaults to 400.
+        height (int| None): Self explanatory. Defaults to 10.
+        width (int| None): Self explanatory. Defaults to 10.
+        dpi (int| None): Self explanatory. Defaults to 400.
     """
     image_arr = get_visual_representation(
         sol_len=3 if include_pressure else 2,
@@ -152,13 +152,23 @@ def main(args, logger, func_data) -> tuple[dict[str, Any], Any]:
     The parameters need to conform to the SPOR_COMM interface defined by
     ReLeSO.
 
+    Note:
+        Args description uses `external main function` as a word for this
+        function. This is due to this documentation being written from the
+        stand point of the releso framework/library, and it calls this
+        function as an external python spor function.
+
     Args:
-        args (_type_): _description_
-        logger (_type_): _description_
-        func_data (_type_): _description_
+        args (Any): releso external main function communication. step data is
+            in here
+        logger (Any): logger than can be used in the external main function
+        func_data (dict): data object that can be used by the external main
+            function to store persistent data. Will not be reset even between
+            episodes. But will be None at training start. If training is
+            restarted it will also be empty  and needs to be reinitialized.
 
     Returns:
-        Set[Dict[str, Any], Any]: _description_
+        Set[Dict[str, Any], Any]: Spor step return values and func_data.
     """
     # first time initialization
     if func_data is None:

@@ -22,21 +22,28 @@ def get_tricontour_solution(
     limits_min: list[float],
     limits_max: list[float],
 ) -> np.ndarray:  # pragma: no cover
-    """_summary_.
+    """Used in the cnn_xns_observation spor function to plot xns solution.
+
+    The solution of velocity in x and y and the pressure are encoded into
+    RGB color one value in each color. And the resulting image is therefore
+    a false color representation of the flowfield solution. Can be used as
+    image input for the RL agent.
+
+    Pressure should be the last of three data points.
 
     Args:
-        width (int): _description_
-        height (int): _description_
-        dpi (int): _description_
-        coordinates (np.ndarray): _description_
-        connectivity (np.ndarray): _description_
-        solution (np.ndarray): _description_
-        sol_len (int): _description_
-        limits_min (List[float]): _description_
-        limits_max (List[float]): _description_
+        width (int): width of the resulting image
+        height (int): height of the resulting image
+        dpi (int): dpi of the resulting image
+        coordinates (:class:`numpy.ndarray`): coordinates of data points
+        connectivity (:class:`numpy.ndarray`): data point conectivity
+        solution (:class:`numpy.ndarray`): []#coordinates,3] data
+        sol_len (int): number of data points should be 3
+        limits_min (List[float]): Lower limit to compress solution values to color
+        limits_max (List[float]): Upper limit to compress solution valies to color
 
     Returns:
-        np.ndarray: _description_
+        :class:`numpy.ndarray`: [pixel, 3] array describing the image.
     """
     arrays: list[np.ndarray] = []
     for i in range(sol_len):
@@ -120,9 +127,9 @@ def get_tricontour_solution(
 #     Args:
 #         files (List[str]): _description_
 #         save_path (str): _description_
-#         fps (int, optional): _description_. Defaults to 5.
-#         delete_used (bool, optional): _description_. Defaults to True.
-#         cut (bool, optional): _description_. Defaults to True.
+#         fps (int| None): _description_. Defaults to 5.
+#         delete_used (bool| None): _description_. Defaults to True.
+#         cut (bool| None): _description_. Defaults to True.
 #     """
 #     images = []
 #     for file_name in files:
@@ -166,7 +173,7 @@ def get_tricontour_solution(
 
 #     Args:
 #         mesh (gus.Mesh): _description_
-#         optional (bool, optional): _description_. Defaults to False.
+#         optional (bool| None): _description_. Defaults to False.
 
 #     Returns:
 #         Tuple[List[List[List[float]]], pd.DataFrame]: _description_
@@ -203,8 +210,8 @@ def get_tricontour_solution(
 #     Args:
 #         mesh (gus.Mesh): _description_
 #         save_name (str): _description_
-#         no_axis (bool, optional): _description_. Defaults to False.
-#         tight (bool, optional): _description_. Defaults to False.
+#         no_axis (bool| None): _description_. Defaults to False.
+#         tight (bool| None): _description_. Defaults to False.
 #     """
 #     plt.rcParams["figure.figsize"] = (20, 20)
 #     plt.rcParams.update({'font.size': 22})
@@ -245,19 +252,19 @@ def get_tricontour_solution(
 
 #     Args:
 #         spline (gus.nurbs.Spline): _description_
-#         axis (Optional[plt.Axes], optional): _description_. Defaults to None.
-#         export_path (Optional[str], optional): _description_.
+#         axis (Optional[plt.Axes]| None): _description_. Defaults to None.
+#         export_path (Optional[str]| None): _description_.
 #           Defaults to None.
-#         close (bool, optional): _description_. Defaults to False.
-#         control_point_marker (str, optional): _description_. Defaults to "*".
-#         control_point_marker_size (int, optional):
+#         close (bool| None): _description_. Defaults to False.
+#         control_point_marker (str| None): _description_. Defaults to "*".
+#         control_point_marker_size (int| None):
 #         _description_. Defaults to 120.
-#         control_point_color (str, optional): _description_. Defaults to "r".
-#         spline_path_color (str, optional): _description_. Defaults to "g".
-#         spline_path_alpha (float, optional): _description_. Defaults to 0.2.
-#         num_points (int, optional): _description_. Defaults to 100.
-#         spline_grid_plot_step (int, optional): _description_. Defaults to 1.
-#         lims (List[List[float]], optional): _description_. Defaults to None.
+#         control_point_color (str| None): Defaults to "r".
+#         spline_path_color (str| None): _description_. Defaults to "g".
+#         spline_path_alpha (float| None): _description_. Defaults to 0.2.
+#         num_points (int| None): _description_. Defaults to 100.
+#         spline_grid_plot_step (int| None): _description_. Defaults to 1.
+#         lims (List[List[float]]| None): _description_. Defaults to None.
 
 #     Raises:
 #         NotImplemented: _description_

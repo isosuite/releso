@@ -28,9 +28,13 @@ except ImportError as err:  # pragma: no cover
 class MeshHierarchy(Enum):
     """Enum to define the mesh hierarchy."""
 
+    #: Enum value for a Vertice
     Vertices = 0
+    #: Enum value for a Edge
     Edges = 1
+    #: Enum value for a Face
     Faces = 2
+    #: Enum value for a Volume
     Volumes = 3
 
 
@@ -116,7 +120,7 @@ class MeshExporter(BaseModel):
 
         Args:
             mesh (GustafMeshTypes): _description_
-            space_time (bool, optional): _description_. Defaults to False.
+            space_time (bool| None): _description_. Defaults to False.
 
         Raises:
             RuntimeError: _description_
@@ -150,7 +154,7 @@ class Mesh(BaseModel):
             trouble.
 
         Returns:
-            gustaf.Mesh: Mesh in gustaf library format.
+            GustafMeshTypes: Mesh in gustaf library format.
         """
 
     def adapt_export_path(self, environment_id: str):
@@ -201,6 +205,7 @@ class MixdMesh(Mesh):
         " mien variable, since if used both the used mien path might not be "
         "the one you think.",
     )
+    #: Wether or no the Mesh is made of hypercubes.
     hypercube: bool = Field(
         description="If True Mesh is made of hypercubes. If False Mesh is made"
         " of simplexes (triangles).",
@@ -218,7 +223,7 @@ class MixdMesh(Mesh):
             trouble.
 
         Returns:
-            gustaf.Mesh: Mesh in gustaf library format.
+            GustafMeshTypes: Mesh in gustaf library format.
         """
         self.get_logger().debug(
             f"Loading volume mesh with mxyz file ({self.mxyz_path}) and "
@@ -412,7 +417,7 @@ class MeshIOMesh(Mesh):
         """Checks if the path given exists and the mesh type is supported.
 
         Args:
-            value (Optional[str]): _description_
+            value (str): _description_
 
         Returns:
             pathlib.Path: Absolute path to the file.
@@ -446,7 +451,7 @@ class MeshIOMesh(Mesh):
             trouble.
 
         Returns:
-            gustaf.Mesh: Mesh in gustaf library format.
+            GustafMeshTypes: Mesh in gustaf library format.
         """
         self.get_logger().debug(f"Loading mesh from path ({self.path}).")
         mesh = meshio.load(fname=self.path)

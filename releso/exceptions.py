@@ -12,18 +12,31 @@ from releso.util.logger import get_parser_logger
 class Stylings(enum.Enum):
     """Possible stylings supported by this Tool."""
 
+    #: style enum value
     Bold = 1
+    #: style enum value
     Faint = 2
+    #: style enum value
     Italic = 3
+    #: style enum value
     Underline = 4
+    #: style enum value
     Black = 30
+    #: style enum value
     Red = 31
+    #: style enum value
     Green = 32
+    #: style enum value
     Yellow = 33
+    #: style enum value
     Blue = 34
+    #: style enum value
     Magenta = 35
+    #: style enum value
     Cyan = 36
+    #: style enum value
     White = 37
+    #: style enum value
 
     def __str__(self) -> str:
         """Encode enum value into a string.
@@ -160,8 +173,8 @@ class AgentUnknownException(Exception):
 
     Args:
         agent (str): Name of the agent which is not set.
-        logger (str, optional): Name of the logger.
-        Defaults to "ReLeSO_environment".
+        logger (str| None): Name of the logger.
+            Defaults to "ReLeSO_environment".
     """
 
     def __init__(self, agent: str, logger: str = "ReLeSO_environment") -> None:
@@ -169,8 +182,8 @@ class AgentUnknownException(Exception):
 
         Args:
             agent (str): Name of the agent which is not set.
-            logger (str, optional): Name of the logger.
-            Defaults to "ReLeSO_environment".
+            logger (str| None): Name of the logger.
+                Defaults to "ReLeSO_environment".
         """
         mes_str: str = f"The {agent} is unknown. Check the spelling or"
         " put in a request to add this agent."
@@ -195,8 +208,8 @@ class ValidationNotSet(Exception):
         """Constructor ValidationNotSetException.
 
         Args:
-            logger (str, optional): Name of the logger.
-            Defaults to "ReLeSO_validation_environment".
+            logger (str| None): Name of the logger.
+                Defaults to "ReLeSO_validation_environment".
         """
         mes_str: str = (
             "Could not create a validation environment due to"

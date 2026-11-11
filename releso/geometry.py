@@ -89,7 +89,7 @@ class Geometry(BaseModel):
         Base geometry has no changes.
 
         Args:
-            environment_id (UUID): Environment id.
+            environment_id (uuid.UUID4): Environment id.
         """
         self._actions = self._get_actions()
 
@@ -112,10 +112,9 @@ class Geometry(BaseModel):
         """Function that applies a given action to the Spline.
 
         Args:
-            action ([type]):  Action value depends on if the ActionSpace is
-                              discrete (int - Signifier of the action) or
-                              Continuous (List[float] - Value for each
-                              continuous variable.)
+            action (list[float] | int):  Action value depends on if the ActionSpace
+                is discrete (int - Signifier of the action) or Continuous (List[float]
+                - Value for each continuous variable.)
         """
         self._last_actions = [act.current_position for act in self._actions]
         self.get_logger().debug(f"Applying action {action}")
@@ -175,7 +174,7 @@ class Geometry(BaseModel):
         """Return actions definition defined by the shape parametrization.
 
         Returns:
-            spaces.Space: VariableLocations that have 'wriggle' room.
+            gymnasium.spaces.Space: VariableLocations that have 'wriggle' room.
         """
         if self.discrete_actions:
             return spaces.Discrete(len(self._actions) * 2)
@@ -209,7 +208,7 @@ class Geometry(BaseModel):
         `action_based_observation`.
 
         Returns:
-            Optional[np.ndarray]: Optional action based observations.
+            :class:`numpy.ndarray` | None: Optional action based observations.
         """
         if not self.action_based_observation:
             return None
@@ -237,7 +236,7 @@ class Geometry(BaseModel):
         environment.
 
         Args:
-            seed (str | None, optional): Seed for the generation of the
+            seed (str | None): Seed for the generation of the
                 random action. The same seed will result in always the same
                 action. This functionality is chosen to make validation
                 possible. If None (default) a random seed will be used and
@@ -278,7 +277,9 @@ class Geometry(BaseModel):
 class FFDGeometry(Geometry):
     """FFD based variable shape."""
 
+    #: Underlying mesh for the FFD.
     mesh: MeshTypes
+    #: Mesh export also encodes the mesh export type.
     export_mesh: MeshExporter | None = None
 
     #: FreeFormDeformation used for the spline based shape optimization
@@ -346,12 +347,12 @@ class FFDGeometry(Geometry):
         and export the resulting mesh to the path given.
 
         Args:
-            path (str | None, optional):
+            path (str | None):
                 Path to where the deformed mesh was exported to or the of no
                 export wanted the vertices of the mesh. Defaults to None.
 
         Returns:
-            str | np.ndarray: Path to the exported mesh file or the
+            str | :class:`numpy.ndarray`: Path to the exported mesh file or the
                 vertices of the mesh.
         """
         self._FFD.spline = self.shape_definition.get_shape()
