@@ -12,10 +12,6 @@ Reinforcement Learning based Shape Optimization (ReLeSO)
     :target: https://releso.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-.. |Documentation Status| image:: https://readthedocs.org/projects/releso/badge/?version=latest
-    :target: https://releso.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
-
 .. |PyPI| image:: https://img.shields.io/pypi/v/releso
     :target: https://pypi.org/project/releso/
     :alt: PyPI
