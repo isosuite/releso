@@ -259,7 +259,7 @@ def get_tricontour_solution(
 #         control_point_marker (str| None): _description_. Defaults to "*".
 #         control_point_marker_size (int| None):
 #         _description_. Defaults to 120.
-#         control_point_color (str| Noneription_. Defaults to "r".
+#         control_point_color (str| None): Defaults to "r".
 #         spline_path_color (str| None): _description_. Defaults to "g".
 #         spline_path_alpha (float| None): _description_. Defaults to 0.2.
 #         num_points (int| None): _description_. Defaults to 100.
