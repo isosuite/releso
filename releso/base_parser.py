@@ -209,7 +209,7 @@ class BaseParser(BaseModel):
         agent from the agent variable. Validation will be done inside the
 
         Args:
-            validation_env (Union[None, Environment] | None): If validation
+            validation_env (Environment | None): If validation
                 environment already exists it will be used else a new validation
                 environment will be created. Defaults to None.
             throw_error_if_none (bool| None): If this is set and the

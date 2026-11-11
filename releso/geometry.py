@@ -236,7 +236,7 @@ class Geometry(BaseModel):
         environment.
 
         Args:
-            seed (str | None| None): Seed for the generation of the
+            seed (str | None): Seed for the generation of the
                 random action. The same seed will result in always the same
                 action. This functionality is chosen to make validation
                 possible. If None (default) a random seed will be used and
@@ -347,7 +347,7 @@ class FFDGeometry(Geometry):
         and export the resulting mesh to the path given.
 
         Args:
-            path (str | None| None):
+            path (str | None):
                 Path to where the deformed mesh was exported to or the of no
                 export wanted the vertices of the mesh. Defaults to None.
 

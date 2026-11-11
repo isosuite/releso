@@ -518,7 +518,7 @@ def plot_step_log(
         episode_step (int| None): Step size for selecting episodes.
           Defaults to 1, which means that every episode between the starting
           and final episode are visualized.
-        figure_size (Union[tuple[int, int], Literal['auto']]| None):
+        figure_size (tuple[int, int] | Literal['auto'] | None):
           Size of the figure. If 'auto', the size will be adjusted to fit the
           container. Defaults to 'auto'.
         objective_observation (list[tuple[str, tuple[int, int]]]): List of
