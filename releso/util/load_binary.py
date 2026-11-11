@@ -17,7 +17,7 @@ def read_mixd_double(
 ) -> np.ndarray:
     """Read a double array from a mixd file.
 
-    Author: Daniel Wolff (wolff@avt.rwth-aachen.de)
+    Author: Daniel Wolff
 
     Args:
         filename (str): filename / location of the mixd file
@@ -53,7 +53,7 @@ def load_mixd(
     After reading in the XNS solution it is stored in the correct attributes
     namely in the `coordinates` and `solution` attributes
 
-    Author: Daniel Wolff (wolff@avt.rwth-aachen.de)
+    Author: Daniel Wolff
 
     Args:
         mesh_file (str): filename / location of the mesh file `mxyz`

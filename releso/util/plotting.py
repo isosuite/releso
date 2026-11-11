@@ -22,21 +22,28 @@ def get_tricontour_solution(
     limits_min: list[float],
     limits_max: list[float],
 ) -> np.ndarray:  # pragma: no cover
-    """_summary_.
+    """Used in the cnn_xns_observation spor function to plot xns solution.
+
+    The solution of velocity in x and y and the pressure are encoded into
+    RGB color one value in each color. And the resulting image is therefore
+    a false color representation of the flowfield solution. Can be used as
+    image input for the RL agent.
+
+    Pressure should be the last of three data points.
 
     Args:
-        width (int): _description_
-        height (int): _description_
-        dpi (int): _description_
-        coordinates (:class:`numpy.ndarray`): _description_
-        connectivity (:class:`numpy.ndarray`): _description_
-        solution (:class:`numpy.ndarray`): _description_
-        sol_len (int): _description_
-        limits_min (List[float]): _description_
-        limits_max (List[float]): _description_
+        width (int): width of the resulting image
+        height (int): height of the resulting image
+        dpi (int): dpi of the resulting image
+        coordinates (:class:`numpy.ndarray`): coordinates of data points
+        connectivity (:class:`numpy.ndarray`): data point conectivity
+        solution (:class:`numpy.ndarray`): []#coordinates,3] data
+        sol_len (int): number of data points should be 3
+        limits_min (List[float]): Lower limit to compress solution values to color
+        limits_max (List[float]): Upper limit to compress solution valies to color
 
     Returns:
-        :class:`numpy.ndarray`: _description_
+        :class:`numpy.ndarray`: [pixel, 3] array describing the image.
     """
     arrays: list[np.ndarray] = []
     for i in range(sol_len):
