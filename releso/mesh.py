@@ -18,11 +18,11 @@ from releso.util.types import GustafMeshTypes
 
 try:
     from gustaf.io import meshio, mixd
-except ImportError as err:  # pragma: no cover
+except ImportError:  # pragma: no cover
     from releso.util.module_import_raiser import ModuleImportRaiser
 
-    meshio = ModuleImportRaiser("gustaf", err)
-    mixd = ModuleImportRaiser("gustaf", err)
+    meshio = ModuleImportRaiser("gustaf")
+    mixd = ModuleImportRaiser("gustaf")
 
 
 class MeshHierarchy(Enum):
