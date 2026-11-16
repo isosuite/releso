@@ -20,11 +20,22 @@ from releso.util.logger import get_parser_logger
 
 try:
     from splinepy import NURBS, BSpline
-except ImportError as err:  # pragma: no cover
+except ImportError as e:  # pragma: no cover
     from releso.util.module_import_raiser import ModuleImportRaiser
 
-    BSpline = ModuleImportRaiser("splinepy", err)
-    NURBS = ModuleImportRaiser("splinepy", err)
+    __import_error = e
+
+    class NURBS(ModuleImportRaiser):
+        __releso_optional_dependency_placeholder__ = True
+
+        def __init__(self, *args, **kwargs):
+            super().__init__("splinepy", str(__import_error))
+
+    class BSpline(ModuleImportRaiser):
+        __releso_optional_dependency_placeholder__ = True
+
+        def __init__(self, *args, **kwargs):
+            super().__init__("splinepy", str(__import_error))
 
 
 class SplineSpaceDimension(BaseModel):

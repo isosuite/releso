@@ -22,10 +22,10 @@ from releso.util.types import ObservationType
 
 try:
     from splinepy.helpme.ffd import FFD
-except ImportError as err:  # pragma: no cover
+except ImportError as e:  # pragma: no cover
     from releso.util.module_import_raiser import ModuleImportRaiser
 
-    FFD = ModuleImportRaiser("splinepy - FFD", err)
+    FFD = ModuleImportRaiser("splinepy", str(e))
 
 ShapeTypes = ShapeDefinition | BSplineDefinition | NURBSDefinition
 

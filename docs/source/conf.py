@@ -14,6 +14,7 @@ documentation root, use os.path.abspath to make it absolute, like shown here.
 """
 
 # Needed to mock specific part of gustaf to clear docs build error
+import inspect
 import sys
 from unittest.mock import MagicMock
 
@@ -160,7 +161,11 @@ def skip(app, what, name, obj, would_skip, options):
         return True
     if name.startswith(("check_", "validate_")):
         return True
-    # return would_skip
+    if inspect.getattr_static(
+        obj, "__releso_optional_dependency_placeholder__", False
+    ):
+        return True
+    return would_skip
 
 
 def setup(app):

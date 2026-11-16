@@ -15,9 +15,19 @@ from releso.util.module_import_raiser import ModuleImportRaiser
 
 try:
     from gustaf import Faces, Volumes
-except ModuleNotFoundError as err:
-    Volumes = ModuleImportRaiser("gustaf", str(err))
-    Faces = ModuleImportRaiser("gustaf", str(err))
+except ModuleNotFoundError:
+
+    class Faces(ModuleImportRaiser):
+        __releso_optional_dependency_placeholder__ = True
+
+        def __init__(self, *args, **kwargs):
+            super().__init__("gustaf")
+
+    class Volumes(ModuleImportRaiser):
+        __releso_optional_dependency_placeholder__ = True
+
+        def __init__(self, *args, **kwargs):
+            super().__init__("gustaf")
 
 
 #: Type definition for Observations.
@@ -30,8 +40,11 @@ RewardType = float
 #: Type definition of the done marker for every step in the RL Environment
 DoneType = bool
 
-#: All possible classes that can make up a mesh
+#: All 2 possible classes that can make up a mesh
+#: see :class:`Volumes <gustaf.volumes.Volumes>` and
+#: :class:`Faces <gustaf.faces.Faces>`
 GustafMeshTypes = Volumes | Faces
+
 #: Type definition for the return value of a Step. A step return the steps
 #: observation, generated reward, whether or not the current step is complete
 #: and additional info.
